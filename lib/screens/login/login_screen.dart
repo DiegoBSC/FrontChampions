@@ -11,7 +11,6 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: Flexible(
         child: Center(
           child: Padding(
             padding: const EdgeInsets.all(15.0),
@@ -46,14 +45,14 @@ class LoginPage extends StatelessWidget {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) => MainScreen()));
                   },
-                  icon: Icon(Icons.add),
+                  icon: Icon(Icons.input),
                   label: Text("Ingresar"),
                 ),
               ],
             ),
           ),
         ),
-      )),
+      ),
     );
   }
 

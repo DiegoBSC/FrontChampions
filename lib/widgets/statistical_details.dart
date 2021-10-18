@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:sport_system_play/widgets/chart.dart';
-import 'package:sport_system_play/widgets/storage_info_card.dart';
+import 'package:sport_system_play/widgets/info_card_list.dart';
 
 import '../../../constants.dart';
 
-class StarageDetails extends StatelessWidget {
-  const StarageDetails({
+class StatisticalDetails extends StatelessWidget {
+  const StatisticalDetails({
     Key? key,
   }) : super(key: key);
 
@@ -29,25 +29,25 @@ class StarageDetails extends StatelessWidget {
           ),
           SizedBox(height: defaultPadding),
           Chart(),
-          StorageInfoCard(
+          InfoCardList(
             svgSrc: "assets/icons/soccer-ball_icon.svg",
             title: "Cancha 01",
             amountOfFiles: "15.3",
             numOfFiles: 1328,
           ),
-          StorageInfoCard(
+          InfoCardList(
             svgSrc: "assets/icons/soccer-ball_icon.svg",
             title: "Cancha 02",
             amountOfFiles: "1.3",
             numOfFiles: 1328,
           ),
-          StorageInfoCard(
+          InfoCardList(
             svgSrc: "assets/icons/soccer-ball_icon.svg",
             title: "Cancha 03",
             amountOfFiles: "1.3",
             numOfFiles: 1328,
           ),
-          StorageInfoCard(
+          InfoCardList(
             svgSrc: "assets/icons/soccer-ball_icon.svg",
             title: "Sin uso",
             amountOfFiles: "1.3",

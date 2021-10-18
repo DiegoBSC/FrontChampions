@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:sport_system_play/responsive.dart';
 import 'package:sport_system_play/widgets/my_files.dart';
 import 'package:sport_system_play/widgets/recent_files.dart';
-import 'package:sport_system_play/widgets/storage_details.dart';
+import 'package:sport_system_play/widgets/statistical_details.dart';
 
 import '../../constants.dart';
 
@@ -23,7 +23,7 @@ class DashboardScreen extends StatelessWidget {
               RecentFiles(),
               if (Responsive.isMobile(context))
                 SizedBox(height: defaultPadding),
-              if (Responsive.isMobile(context)) StarageDetails(),
+              if (Responsive.isMobile(context)) StatisticalDetails(),
             ],
           ),
         ),
@@ -32,7 +32,7 @@ class DashboardScreen extends StatelessWidget {
         if (!Responsive.isMobile(context))
           Expanded(
             flex: 2,
-            child: StarageDetails(),
+            child: StatisticalDetails(),
           ),
       ],
     );

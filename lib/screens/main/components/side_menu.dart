@@ -1,12 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class SideMenu extends StatelessWidget {
-  // final String onSelectSubMenu;
-  const SideMenu({
-    Key? key,
-  }) : super(key: key);
+// ignore: must_be_immutable
+class SideMenu extends StatefulWidget {
+  Function(String)? onSelectMenu;
 
+  SideMenu({Key? key, this.onSelectMenu}) : super(key: key);
+
+  @override
+  State<SideMenu> createState() => _SideMenuState();
+}
+
+class _SideMenuState extends State<SideMenu> {
   @override
   Widget build(BuildContext context) {
     return Drawer(
@@ -18,12 +23,16 @@ class SideMenu extends StatelessWidget {
           DrawerListTile(
             title: "Dashboard",
             svgSrc: "assets/icons/dashboard.svg",
-            press: () {},
+            press: () {
+              widget.onSelectMenu!("Dashboard");
+            },
           ),
           DrawerListTile(
             title: "Usuarios",
             svgSrc: "assets/icons/user.svg",
-            press: () {},
+            press: () {
+              widget.onSelectMenu!("User");
+            },
           ),
           DrawerListTile(
             title: "Complejo",

@@ -1,14 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:sport_system_play/constants.dart';
+import 'package:sport_system_play/helpers/view_alert.dart';
 import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/screens/main/main_screen.dart';
+import 'package:sport_system_play/services/auth_service.dart';
 
-class LoginPage extends StatelessWidget {
+class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
 
   @override
+  State<LoginPage> createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
+  final emailCtrl = TextEditingController();
+  final passCtrl = TextEditingController();
+  @override
+  void dispose() {
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final authService = Provider.of<AuthService>(context);
     return Scaffold(
       body: SafeArea(
         child: Center(
@@ -41,10 +56,22 @@ class LoginPage extends StatelessWidget {
                           (Responsive.isMobile(context) ? 2 : 1),
                     ),
                   ),
-                  onPressed: () {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => MainScreen()));
-                  },
+                  onPressed: authService.loading
+                      ? null
+                      : () async {
+                          FocusScope.of(context).unfocus();
+                          final loginResponse = await authService.login(
+                              emailCtrl.text.trim(), passCtrl.text.trim());
+
+                          if (loginResponse) {
+                            // Navegar otra pantalla
+                            Navigator.pushReplacementNamed(
+                                context, 'mainscreen');
+                          } else {
+                            viewAlert(context, "Error :(",
+                                "Credenciales incorrectas");
+                          }
+                        },
                   icon: Icon(Icons.input),
                   label: Text("Ingresar"),
                 ),
@@ -60,6 +87,8 @@ class LoginPage extends StatelessWidget {
     return SizedBox(
       width: 400,
       child: TextField(
+          autocorrect: false,
+          controller: emailCtrl,
           decoration: _decorationStyle(
               "Email",
               Icon(
@@ -73,10 +102,13 @@ class LoginPage extends StatelessWidget {
     return SizedBox(
       width: 400,
       child: TextField(
+          autocorrect: false,
+          controller: passCtrl,
+          obscureText: true,
           decoration: _decorationStyle(
               "Clave",
               Icon(
-                Icons.password,
+                Icons.lock_outline,
                 color: primaryColor,
               ))),
     );
@@ -100,5 +132,10 @@ class LoginPage extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  bool isloginUser() {
+    //Traer Token
+    return false;
   }
 }

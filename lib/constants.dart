@@ -7,3 +7,7 @@ const successColor = Color(0xFF4F66A8);
 const dangerColor = Color(0xFFA84F6A);
 
 const defaultPadding = 16.0;
+
+const screenNew = 'SCREENNEW';
+const screenList = 'SCREENLIST';
+const screenVoid = 'SCREENVOID';

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play_mono/blocs/bloc/user_bloc.dart';
+import 'package:sport_system_play_mono/blocs/bloc/userPageBloc/user_page_bloc.dart';
 import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/controllers/menu_controller.dart';
 import 'package:sport_system_play_mono/screens/loading_page/loading_page.dart';
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [BlocProvider(create: (_) => UserBloc())],
+      providers: [BlocProvider(create: (_) => UserPageBloc())],
       child: MultiProvider(
         providers: [
           ChangeNotifierProvider(

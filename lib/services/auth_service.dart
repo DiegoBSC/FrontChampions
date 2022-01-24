@@ -2,9 +2,9 @@ import 'dart:convert';
 
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-import 'package:sport_system_play/global/enviroments.dart';
-import 'package:sport_system_play/models/login_model.dart';
-import 'package:sport_system_play/models/user_presenter.dart';
+import 'package:sport_system_play_mono/global/enviroments.dart';
+import 'package:sport_system_play_mono/models/login_model.dart';
+import 'package:sport_system_play_mono/models/user_presenter.dart';
 
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -38,13 +38,17 @@ class AuthService with ChangeNotifier {
 
     final resp = await http.post(Uri.parse('${Enviroments.apiUrlUser}/login'),
         body: jsonEncode(data), headers: {'Content-Type': 'application/json'});
-
-    if (resp.statusCode == 200 && resp.body.isNotEmpty) {
-      final loginModel = loginModelFromJson(resp.body);
-      userPresenter = loginModel.userPresenter;
-      await _saveToken(loginModel.token);
+    try {
+      if (resp.statusCode == 200 && resp.body.isNotEmpty) {
+        final loginModel = loginModelFromJson(resp.body);
+        userPresenter = loginModel.userPresenter;
+        await _saveToken(loginModel.token);
+        loading = false;
+        return true;
+      }
+    } catch (_) {
       loading = false;
-      return true;
+      return false;
     }
 
     loading = false;

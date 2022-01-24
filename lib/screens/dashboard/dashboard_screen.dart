@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/widgets/my_files.dart';
-import 'package:sport_system_play/widgets/recent_files.dart';
-import 'package:sport_system_play/widgets/statistical_details.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/widgets/my_files.dart';
+import 'package:sport_system_play_mono/widgets/recent_files.dart';
+import 'package:sport_system_play_mono/widgets/statistical_details.dart';
 
 import '../../constants.dart';
 

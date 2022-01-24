@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:sport_system_play/models/user_presenter.dart';
+import 'package:sport_system_play_mono/models/user_presenter.dart';
 
 PaginatorUserModel paginatorUserModelFromJson(String str) =>
     PaginatorUserModel.fromJson(json.decode(str));
@@ -20,18 +20,18 @@ class PaginatorUserModel {
     totalElements = json['totalElements'];
     if (json['data'] != null) {
       data = <UserPresenter>[];
-      json['data'].forEach((v) {
-        data!.add(UserPresenter.fromJson(v));
+      json['data'].forEach((item) {
+        data!.add(UserPresenter.fromJson(item));
       });
     }
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data['totalPages'] = totalPages;
     data['totalElements'] = totalElements;
     if (this.data != null) {
-      data['data'] = this.data!.map((v) => v.toJson()).toList();
+      data['data'] = this.data!.map((item) => item.toJson()).toList();
     }
     return data;
   }

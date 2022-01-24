@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:dropdown_button2/dropdown_button2.dart';
-import 'package:sport_system_play/constants.dart';
-import 'package:sport_system_play/services/auth_service.dart';
+import 'package:sport_system_play_mono/constants.dart';
+import 'package:sport_system_play_mono/services/auth_service.dart';
 
 class ProfileCard extends StatefulWidget {
   const ProfileCard({Key? key}) : super(key: key);

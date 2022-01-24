@@ -1,23 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_system_play/blocs/bloc/user_bloc.dart';
-import 'package:sport_system_play/constants.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/widgets/content_page.dart';
+import 'package:sport_system_play_mono/blocs/bloc/user_bloc.dart';
+import 'package:sport_system_play_mono/constants.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/widgets/content_page.dart';
+import 'package:sport_system_play_mono/widgets/list_table_user.dart';
 
 class UserScreen extends StatelessWidget {
   const UserScreen({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    BlocProvider.of<UserBloc>(context, listen: false)
-        .add(UserListEvent(0, 10, "61aea3a65fef67760c318eff"));
+    BlocProvider.of<UserBloc>(context, listen: false).add(UserListEvent(0, 10));
 
     return Row(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         Expanded(
-          flex: 5,
           child: Column(
             children: [
               Row(
@@ -42,8 +41,20 @@ class UserScreen extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              ContentPage(
-                titleContent: '',
+              BlocBuilder<UserBloc, UserState>(
+                builder: (_, state) {
+                  if (state.paginatorUserModel != null &&
+                      state.paginatorUserModel!.data!.isNotEmpty) {
+                    return ContentPage(
+                      titleContent: 'Usuarios Registrados',
+                      dataContent: ListTableUser(
+                        paginator: state.paginatorUserModel,
+                      ),
+                    );
+                  } else {
+                    return Text("No existe usuarios");
+                  }
+                },
               )
             ],
           ),

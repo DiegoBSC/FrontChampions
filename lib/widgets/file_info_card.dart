@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sport_system_play/models/my_files.dart';
+import 'package:sport_system_play_mono/models/my_files.dart';
 
 import '../../../constants.dart';
 

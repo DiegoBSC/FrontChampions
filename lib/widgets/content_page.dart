@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:sport_system_play/constants.dart';
+import 'package:sport_system_play_mono/constants.dart';
 
 class ContentPage extends StatelessWidget {
+  final Widget dataContent;
   final String titleContent;
-  const ContentPage({Key? key, required this.titleContent}) : super(key: key);
+  const ContentPage(
+      {Key? key, required this.titleContent, required this.dataContent})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return FractionallySizedBox(
       child: Container(
-        height: MediaQuery.of(context).size.height - 150,
+        height: MediaQuery.of(context).size.height - 170,
         padding: EdgeInsets.all(defaultPadding),
         decoration: BoxDecoration(
           color: secondaryColor,
@@ -25,6 +28,7 @@ class ContentPage extends StatelessWidget {
             SizedBox(
               width: double.infinity,
             ),
+            dataContent,
           ],
         ),
       ),

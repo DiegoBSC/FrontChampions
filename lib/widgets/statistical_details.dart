@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:sport_system_play/widgets/chart.dart';
-import 'package:sport_system_play/widgets/info_card_list.dart';
+import 'package:sport_system_play_mono/widgets/chart.dart';
+import 'package:sport_system_play_mono/widgets/info_card_list.dart';
 
 import '../../../constants.dart';
 

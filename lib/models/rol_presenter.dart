@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:sport_system_play/models/permission_presenters.dart';
+import 'package:sport_system_play_mono/models/permission_presenters.dart';
 
 RolPresenter rolPresenterFromJson(String str) =>
     RolPresenter.fromJson(json.decode(str));

@@ -1,14 +1,15 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play/blocs/bloc/user_bloc.dart';
-import 'package:sport_system_play/constants.dart';
-import 'package:sport_system_play/controllers/menu_controller.dart';
-import 'package:sport_system_play/screens/loading_page/loading_page.dart';
-import 'package:sport_system_play/screens/login/login_screen.dart';
-import 'package:sport_system_play/screens/main/main_screen.dart';
-import 'package:sport_system_play/services/auth_service.dart';
+import 'package:sport_system_play_mono/blocs/bloc/user_bloc.dart';
+import 'package:sport_system_play_mono/constants.dart';
+import 'package:sport_system_play_mono/controllers/menu_controller.dart';
+import 'package:sport_system_play_mono/screens/loading_page/loading_page.dart';
+import 'package:sport_system_play_mono/screens/login/login_screen.dart';
+import 'package:sport_system_play_mono/screens/main/main_screen.dart';
+import 'package:sport_system_play_mono/services/auth_service.dart';
 
 void main() {
   runApp(MyApp());
@@ -32,6 +33,14 @@ class MyApp extends StatelessWidget {
           ),
         ],
         child: MaterialApp(
+            scrollBehavior: MaterialScrollBehavior().copyWith(
+              dragDevices: {
+                PointerDeviceKind.mouse,
+                PointerDeviceKind.touch,
+                PointerDeviceKind.stylus,
+                PointerDeviceKind.unknown
+              },
+            ),
             debugShowCheckedModeBanner: false,
             title: 'Reserva Canchas Admin',
             routes: {

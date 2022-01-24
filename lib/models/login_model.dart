@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:sport_system_play/models/user_presenter.dart';
+import 'package:sport_system_play_mono/models/user_presenter.dart';
 
 LoginModel loginModelFromJson(String str) =>
     LoginModel.fromJson(json.decode(str));

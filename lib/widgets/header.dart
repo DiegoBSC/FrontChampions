@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play/controllers/menu_controller.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/widgets/profile_card.dart';
-import 'package:sport_system_play/widgets/search_field.dart';
+import 'package:sport_system_play_mono/controllers/menu_controller.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/widgets/profile_card.dart';
+import 'package:sport_system_play_mono/widgets/search_field.dart';
 
 class Header extends StatefulWidget {
   final String namePage;

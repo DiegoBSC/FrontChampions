@@ -4,7 +4,7 @@
 
 import 'dart:convert';
 
-import 'package:sport_system_play/models/rol_presenter.dart';
+import 'package:sport_system_play_mono/models/rol_presenter.dart';
 
 UserPresenter userPresenterFromJson(String str) =>
     UserPresenter.fromJson(json.decode(str));
@@ -12,15 +12,14 @@ UserPresenter userPresenterFromJson(String str) =>
 String userPresenterToJson(UserPresenter data) => json.encode(data.toJson());
 
 class UserPresenter {
-  UserPresenter({
-    required this.id,
-    required this.username,
-    required this.email,
-    this.password = "",
-    required this.status,
-    required this.rolesPresenter,
-    required this.idCompany,
-  });
+  UserPresenter(
+      {required this.id,
+      required this.username,
+      required this.email,
+      this.password = "",
+      required this.status,
+      required this.rolesPresenter,
+      required this.createdDate});
 
   String id;
   String username;
@@ -28,7 +27,7 @@ class UserPresenter {
   String password;
   String status;
   List<RolPresenter> rolesPresenter;
-  String idCompany;
+  DateTime createdDate;
 
   factory UserPresenter.fromJson(Map<String, dynamic> json) => UserPresenter(
         id: json["id"],
@@ -38,7 +37,7 @@ class UserPresenter {
         status: json["status"],
         rolesPresenter: List<RolPresenter>.from(
             json["rolesPresenter"].map((x) => RolPresenter.fromJson(x))),
-        idCompany: json["idCompany"],
+        createdDate: DateTime.parse(json["createdDate"]),
       );
 
   Map<String, dynamic> toJson() => {
@@ -49,6 +48,5 @@ class UserPresenter {
         "status": status,
         "rolesPresenter":
             List<RolPresenter>.from(rolesPresenter.map((x) => x.toJson())),
-        "idCompany": idCompany,
       };
 }

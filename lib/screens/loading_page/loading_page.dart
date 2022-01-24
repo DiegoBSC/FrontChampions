@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play/constants.dart';
-import 'package:sport_system_play/screens/login/login_screen.dart';
-import 'package:sport_system_play/screens/main/main_screen.dart';
-import 'package:sport_system_play/services/auth_service.dart';
+import 'package:sport_system_play_mono/constants.dart';
+import 'package:sport_system_play_mono/screens/login/login_screen.dart';
+import 'package:sport_system_play_mono/screens/main/main_screen.dart';
+import 'package:sport_system_play_mono/services/auth_service.dart';
 
 class LoadingPage extends StatelessWidget {
   const LoadingPage({Key? key}) : super(key: key);

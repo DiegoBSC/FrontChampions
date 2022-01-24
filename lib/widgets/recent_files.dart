@@ -1,6 +1,5 @@
-import 'package:data_table_2/data_table_2.dart';
 import 'package:flutter/material.dart';
-import 'package:sport_system_play/models/recent_file.dart';
+import 'package:sport_system_play_mono/models/recent_file.dart';
 
 import '../../../constants.dart';
 
@@ -24,28 +23,27 @@ class RecentFiles extends StatelessWidget {
             "Ultimas Reservas",
             style: Theme.of(context).textTheme.subtitle1,
           ),
-          SizedBox(
-            width: double.infinity,
-            child: DataTable2(
-              columnSpacing: defaultPadding,
-              minWidth: 600,
-              columns: const [
-                DataColumn(
-                  label: Text("Nro. Cancha"),
-                ),
-                DataColumn(
-                  label: Text("Fecha"),
-                ),
-                DataColumn(
-                  label: Text("Horario"),
-                ),
-              ],
-              rows: List.generate(
-                demoRecentFiles.length,
-                (index) => recentFileDataRow(demoRecentFiles[index]),
+          SizedBox(width: double.infinity, child: Text("tABLA")
+              // DataTable2(
+              //   columnSpacing: defaultPadding,
+              //   minWidth: 600,
+              //   columns: const [
+              //     DataColumn(
+              //       label: Text("Nro. Cancha"),
+              //     ),
+              //     DataColumn(
+              //       label: Text("Fecha"),
+              //     ),
+              //     DataColumn(
+              //       label: Text("Horario"),
+              //     ),
+              //   ],
+              // rows: List.generate(
+              // demoRecentFiles.length,
+              //   (index) => recentFileDataRow(demoRecentFiles[index]),
+              // ),
+              // ),
               ),
-            ),
-          ),
         ],
       ),
     );

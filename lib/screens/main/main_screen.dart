@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play/controllers/menu_controller.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/screens/dashboard/dashboard_screen.dart';
-import 'package:sport_system_play/screens/templates/template_pages.dart';
-import 'package:sport_system_play/screens/user/user_screen.dart';
+import 'package:sport_system_play_mono/controllers/menu_controller.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/screens/dashboard/dashboard_screen.dart';
+import 'package:sport_system_play_mono/screens/templates/template_pages.dart';
+import 'package:sport_system_play_mono/screens/user/user_screen.dart';
 
 import 'components/side_menu.dart';
 
+// ignore: must_be_immutable
 class MainScreen extends StatefulWidget {
   String screenSelect;
 
@@ -48,7 +49,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             Expanded(
               // It takes 5/6 part of the screen
-              flex: 5,
+              flex: 6,
               child: TemplatePage(
                 content: buildPageBySelectMenu(widget.screenSelect),
                 namePage: widget.screenSelect,

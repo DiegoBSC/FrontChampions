@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:sport_system_play/widgets/header.dart';
+import 'package:sport_system_play_mono/widgets/header.dart';
 
 import '../../constants.dart';
 
@@ -12,8 +12,10 @@ class TemplatePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ScrollController controller = ScrollController();
     return SafeArea(
       child: SingleChildScrollView(
+        controller: controller,
         padding: EdgeInsets.all(defaultPadding),
         child: Column(
           children: [

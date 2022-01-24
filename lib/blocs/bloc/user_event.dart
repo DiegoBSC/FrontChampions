@@ -11,6 +11,5 @@ class SelectUserEvent extends UserEvent {
 class UserListEvent extends UserEvent {
   final int page;
   final int size;
-  final String customerId;
-  UserListEvent(this.page, this.size, this.customerId);
+  UserListEvent(this.page, this.size);
 }

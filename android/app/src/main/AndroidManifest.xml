@@ -1,7 +1,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.sport_system_play">
+    package="com.example.sport_system_play_mono">
    <application
-        android:label="sport_system_play"
+        android:label="sport_system_play_mono"
         android:icon="@mipmap/ic_launcher">
         <activity
             android:name=".MainActivity"

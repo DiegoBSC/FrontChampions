@@ -46,7 +46,7 @@ class _SideMenuState extends State<SideMenu> {
           ),
           DrawerListTile(
             title: "Productos",
-            svgSrc: "assets/icons/product.svg",
+            svgSrc: "assets/icons/soccer-ball_icon.svg",
             press: () {},
           ),
           DrawerListTile(

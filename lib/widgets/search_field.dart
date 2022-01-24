@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:sport_system_play/constants.dart';
+import 'package:sport_system_play_mono/constants.dart';
 
 class SearchField extends StatelessWidget {
   const SearchField({

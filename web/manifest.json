@@ -1,6 +1,6 @@
 {
-    "name": "sport_system_play",
-    "short_name": "sport_system_play",
+    "name": "sport_system_play_mono",
+    "short_name": "sport_system_play_mono",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

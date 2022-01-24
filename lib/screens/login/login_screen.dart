@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sport_system_play/constants.dart';
-import 'package:sport_system_play/helpers/view_alert.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/services/auth_service.dart';
+import 'package:sport_system_play_mono/constants.dart';
+import 'package:sport_system_play_mono/helpers/view_alert.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/services/auth_service.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

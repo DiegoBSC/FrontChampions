@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:sport_system_play/blocs/bloc/user_bloc.dart';
-import 'package:sport_system_play/models/my_files.dart';
-import 'package:sport_system_play/models/user_presenter.dart';
-import 'package:sport_system_play/responsive.dart';
-import 'package:sport_system_play/widgets/file_info_card.dart';
+import 'package:sport_system_play_mono/models/my_files.dart';
+import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/widgets/file_info_card.dart';
 import '../../../constants.dart';
 
 class MyFiles extends StatelessWidget {

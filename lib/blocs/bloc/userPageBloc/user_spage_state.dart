@@ -12,7 +12,8 @@ class UserInitial extends UserPageState {
             userBlocModel: UserBlocModel(
                 userSelect: null,
                 paginatorUserModel: null,
-                statePage: screenList));
+                statePage: screenList,
+                page: 0));
 }
 
 class UserSet extends UserPageState {

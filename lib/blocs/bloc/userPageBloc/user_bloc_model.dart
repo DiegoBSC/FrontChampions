@@ -5,16 +5,20 @@ class UserBlocModel {
   UserPresenter? userSelect;
   PaginatorUserModel? paginatorUserModel;
   String? statePage;
+  int? page;
 
-  UserBlocModel({this.userSelect, this.paginatorUserModel, this.statePage});
+  UserBlocModel(
+      {this.userSelect, this.paginatorUserModel, this.statePage, this.page});
 
   copyWith({
     UserPresenter? userSelect,
     PaginatorUserModel? paginatorUserModel,
     String? statePage,
+    int? page,
   }) =>
       UserBlocModel(
           userSelect: userSelect ?? this.userSelect,
           paginatorUserModel: paginatorUserModel ?? this.paginatorUserModel,
-          statePage: statePage ?? this.statePage);
+          statePage: statePage ?? this.statePage,
+          page: page ?? this.page);
 }

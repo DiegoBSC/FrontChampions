@@ -15,8 +15,8 @@ class UserPageBloc extends Bloc<UserPageEvent, UserPageState> {
       UserRepository repository =
           UserRepository(page: event.page, size: event.size);
       PaginatorUserModel? paginator = await repository.getUsersByAdmin();
-      emit(UserSet(
-          state.userBlocModel!.copyWith(paginatorUserModel: paginator)));
+      emit(UserSet(state.userBlocModel!
+          .copyWith(paginatorUserModel: paginator, page: event.page)));
     });
 
     on<UserScreenEvent>((event, emit) {

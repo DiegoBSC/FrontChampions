@@ -5,6 +5,7 @@ import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/responsive.dart';
 import 'package:sport_system_play_mono/widgets/content_page.dart';
 import 'package:sport_system_play_mono/widgets/list_table_user.dart';
+import 'package:sport_system_play_mono/widgets/paginator.dart';
 
 class UserListScreen extends StatefulWidget {
   final UserPageBloc userPageBloc;
@@ -18,7 +19,7 @@ class UserListScreen extends StatefulWidget {
 class _UserListScreenState extends State<UserListScreen> {
   @override
   void initState() {
-    widget.userPageBloc.add(UserListEvent(0, 2));
+    widget.userPageBloc.add(UserListEvent(0, 6));
     super.initState();
   }
 
@@ -31,12 +32,12 @@ class _UserListScreenState extends State<UserListScreen> {
           child: Column(
             children: [
               Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Container(),
                   ElevatedButton.icon(
                     style: TextButton.styleFrom(
-                      backgroundColor: Color(0xFF6aa84f),
+                      backgroundColor: successColor,
                       padding: EdgeInsets.symmetric(
                         horizontal: defaultPadding * 1.5,
                         vertical: defaultPadding /
@@ -49,21 +50,21 @@ class _UserListScreenState extends State<UserListScreen> {
                     icon: Icon(Icons.add),
                     label: Text("Nuevo"),
                   ),
-                  ElevatedButton.icon(
-                    style: TextButton.styleFrom(
-                      backgroundColor: Color(0xFF6aa84f),
-                      padding: EdgeInsets.symmetric(
-                        horizontal: defaultPadding * 1.5,
-                        vertical: defaultPadding /
-                            (Responsive.isMobile(context) ? 2 : 1),
-                      ),
-                    ),
-                    onPressed: () {
-                      widget.userPageBloc.add(UserListEvent(1, 2));
-                    },
-                    icon: Icon(Icons.add),
-                    label: Text("Siguiente"),
+                  SizedBox(
+                    width: 20,
                   ),
+                  widget.userPageBloc.state.userBlocModel!.paginatorUserModel !=
+                          null
+                      ? Paginator(
+                          totalPage: widget.userPageBloc.state.userBlocModel!
+                              .paginatorUserModel!.totalPages!,
+                          page: widget.userPageBloc.state.userBlocModel!.page!,
+                          size: 6,
+                          onChangePage: (value) {
+                            widget.userPageBloc.add(UserListEvent(value, 6));
+                          },
+                        )
+                      : Text("cargando")
                 ],
               ),
               SizedBox(

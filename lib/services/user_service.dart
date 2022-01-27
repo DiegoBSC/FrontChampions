@@ -1,7 +1,10 @@
+import 'dart:convert';
+
 import 'package:sport_system_play_mono/global/enviroments.dart';
 import 'package:sport_system_play_mono/models/paginator_user_model.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:sport_system_play_mono/models/user_presenter.dart';
 import 'package:sport_system_play_mono/services/auth_service.dart';
 
 class UserService {
@@ -35,5 +38,21 @@ class UserService {
 
     loading = false;
     return null;
+  }
+
+  Future<UserPresenter?> saveUser(UserPresenter userSave) async {
+    try {
+      loading = true;
+      final data = jsonEncode(userSave.toJson());
+      final resp = await http.post(Uri.parse('${Enviroments.apiUrl}/user/save'),
+          body: data, headers: {'Content-Type': 'application/json'});
+      if (resp.statusCode == 200 && resp.body.isNotEmpty) {
+        loading = false;
+        return userPresenterFromJson(resp.body);
+      }
+    } catch (_) {
+      loading = false;
+      return null;
+    }
   }
 }

@@ -18,3 +18,8 @@ class UserScreenEvent extends UserPageEvent {
   final String statePage;
   UserScreenEvent(this.statePage);
 }
+
+class NewUserEvent extends UserPageEvent {
+  final UserPresenter newUSer;
+  NewUserEvent(this.newUSer);
+}

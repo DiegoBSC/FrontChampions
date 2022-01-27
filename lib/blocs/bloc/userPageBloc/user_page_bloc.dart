@@ -22,5 +22,11 @@ class UserPageBloc extends Bloc<UserPageEvent, UserPageState> {
     on<UserScreenEvent>((event, emit) {
       emit(UserSet(state.userBlocModel!.copyWith(statePage: event.statePage)));
     });
+
+    on<NewUserEvent>((event, emit) async {
+      UserRepository repository = UserRepository(userPresenter: event.newUSer);
+      await repository.saveUser();
+      emit(UserSet(state.userBlocModel!.copyWith(statePage: screenList)));
+    });
   }
 }

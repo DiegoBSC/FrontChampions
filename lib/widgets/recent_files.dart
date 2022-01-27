@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:sport_system_play_mono/models/recent_file.dart';
+import 'package:sport_system_play_mono/responsive.dart';
 
 import '../../../constants.dart';
 
@@ -10,6 +11,8 @@ class RecentFiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    String dropdownvalue = 'ROLE_USER';
+    List<String> items = ['ROLE_ADMIN', 'ROLE_USER'];
     return Container(
       padding: EdgeInsets.all(defaultPadding),
       decoration: BoxDecoration(
@@ -24,69 +27,6 @@ class RecentFiles extends StatelessWidget {
             style: Theme.of(context).textTheme.subtitle1,
           ),
           SizedBox(width: double.infinity, child: Text("tABLA")),
-
-          TextFormField(
-            initialValue: '',
-            maxLength: 20,
-            decoration: InputDecoration(
-                icon: Icon(
-                  Icons.favorite,
-                  color: primaryColor,
-                ),
-                labelText: 'Usuario',
-                labelStyle: TextStyle(
-                  color: primaryColor,
-                ),
-                enabledBorder: UnderlineInputBorder(
-                  borderSide: BorderSide(color: primaryColor),
-                ),
-                focusedBorder: UnderlineInputBorder(
-                  borderRadius: BorderRadius.all(Radius.circular(10)),
-                  borderSide: BorderSide(width: 1, color: primaryColor),
-                ),
-                focusColor: Colors.red),
-            focusNode: FocusNode(),
-          ),
-
-//Modelo
-          TextField(
-            decoration: InputDecoration(
-                border: OutlineInputBorder(),
-                hintText: 'Tell us about yourself',
-                helperText: 'Keep it short, this is just a demo.',
-                labelText: 'Life story',
-                prefixIcon: const Icon(
-                  Icons.person,
-                  color: Colors.green,
-                ),
-                prefixText: ' ',
-                suffixText: 'USD',
-                suffixStyle: const TextStyle(color: Colors.green)),
-          ),
-//Modelo
-          Theme(
-            data: ThemeData(
-                primaryColor: primaryColor, primaryColorDark: primaryColor),
-            child: TextField(
-              decoration: InputDecoration(
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    borderSide: BorderSide(width: 1, color: primaryColor),
-                  ),
-                  border: OutlineInputBorder(),
-                  hintText: 'Digita nombre de usuario',
-                  labelText: 'Nombre Usuario',
-                  prefixIcon: const Icon(
-                    Icons.person,
-                    color: primaryColor,
-                  ),
-                  suffixStyle: const TextStyle(color: Colors.green)),
-            ),
-          ),
-          SizedBox(
-            height: 50,
-          ),
-
           TextFormField(
             decoration: InputDecoration(
               fillColor: bgColor,
@@ -105,26 +45,76 @@ class RecentFiles extends StatelessWidget {
                 borderSide: BorderSide(color: primaryColor),
               ),
             ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          SizedBox(
+            width: Responsive.isMobile(context) ? null : 400,
+            child: DropdownButtonFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: Colors.grey.shade500),
+                ),
+              ),
+              value: dropdownvalue,
+              icon: Icon(Icons.keyboard_arrow_down),
+              items: items.map((String items) {
+                return DropdownMenuItem(value: items, child: Text(items));
+              }).toList(),
+              onChanged: (newValue) {
+                dropdownvalue = newValue.toString();
+              },
+            ),
+          ),
+          SizedBox(
+            height: 50,
+          ),
+          SizedBox(
+            width: Responsive.isMobile(context) ? null : 500,
+            child: TextFormField(
+              decoration: InputDecoration(
+                fillColor: bgColor,
+                filled: true,
+                labelText: 'Usuario',
+                labelStyle: TextStyle(
+                  color: Colors.white60,
+                ),
+                focusedBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(width: 1, color: Colors.grey.shade700),
+                ),
+                enabledBorder: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: Colors.grey.shade500),
+                ),
+              ),
+            ),
+          ),
+          Container(
+            width: Responsive.isMobile(context) ? null : 400,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.all(Radius.circular(10)),
+              color: bgColor,
+            ),
+            child: DropdownButtonFormField(
+              decoration: InputDecoration(
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.all(Radius.circular(10)),
+                  borderSide: BorderSide(color: Colors.grey.shade500),
+                ),
+              ),
+              value: dropdownvalue,
+              icon: Icon(Icons.keyboard_arrow_down),
+              items: items.map((String items) {
+                return DropdownMenuItem(value: items, child: Text(items));
+              }).toList(),
+              onChanged: (newValue) {
+                dropdownvalue = newValue.toString();
+              },
+            ),
           )
-          // DataTable2(
-          //   columnSpacing: defaultPadding,
-          //   minWidth: 600,
-          //   columns: const [
-          //     DataColumn(
-          //       label: Text("Nro. Cancha"),
-          //     ),
-          //     DataColumn(
-          //       label: Text("Fecha"),
-          //     ),
-          //     DataColumn(
-          //       label: Text("Horario"),
-          //     ),
-          //   ],
-          // rows: List.generate(
-          // demoRecentFiles.length,
-          //   (index) => recentFileDataRow(demoRecentFiles[index]),
-          // ),
-          // ),
         ],
       ),
     );

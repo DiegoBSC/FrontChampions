@@ -28,9 +28,11 @@ class PermissionPresenters {
         status: json["status"],
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "status": status,
-      };
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+    _data['id'] = id;
+    _data['name'] = name;
+    _data['status'] = status;
+    return _data;
+  }
 }

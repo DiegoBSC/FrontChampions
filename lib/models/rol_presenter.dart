@@ -16,13 +16,13 @@ class RolPresenter {
     this.id = "",
     this.name = "",
     this.status = "",
-    required this.permissionsPresenters,
+    this.permissionsPresenters,
   });
 
   String id;
   String name;
   String status;
-  List<PermissionPresenters> permissionsPresenters;
+  List<PermissionPresenters>? permissionsPresenters;
 
   factory RolPresenter.fromJson(Map<String, dynamic> json) => RolPresenter(
         id: json["id"],
@@ -33,12 +33,20 @@ class RolPresenter {
                 .map((x) => PermissionPresenters.fromJson(x))),
       );
 
-  Map<String, dynamic> toJson() => {
-        "id": id,
-        "name": name,
-        "status": status,
-        "permissionsPresenters": permissionsPresenters =
-            List<PermissionPresenters>.from(
-                permissionsPresenters.map((x) => x.toJson())),
-      };
+  Map<String, dynamic> toJson() {
+    final _data = <String, dynamic>{};
+
+    if (id.isNotEmpty) {
+      _data['id'] = id;
+    }
+    _data['name'] = name;
+    if (status.isNotEmpty) {
+      _data['status'] = status;
+    }
+    if (permissionsPresenters != null) {
+      _data['permissionsPresenters'] =
+          permissionsPresenters!.map((e) => e.toJson()).toList();
+    }
+    return _data;
+  }
 }

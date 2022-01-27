@@ -76,7 +76,7 @@ Widget cardDataUser(BuildContext context, UserPresenter presenter, int index) {
             width: MediaQuery.of(context).size.width * 0.20,
             child: Text(presenter.email)),
         Text(presenter.createdDate.toString().substring(0, 10)),
-        Text(ValueLabel.stateLabel(presenter.status)),
+        Text(ValueLabel.stateLabel(presenter.status!)),
         SizedBox(
           child: Row(
             children: [
@@ -154,7 +154,7 @@ Widget cardDataUserMovil(
                 overflow: TextOverflow.ellipsis,
               ),
               Text(
-                ValueLabel.stateLabel(presenter.status),
+                ValueLabel.stateLabel(presenter.status!),
                 maxLines: 1,
                 overflow: TextOverflow.ellipsis,
               ),

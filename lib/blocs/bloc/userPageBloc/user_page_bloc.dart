@@ -20,12 +20,32 @@ class UserPageBloc extends Bloc<UserPageEvent, UserPageState> {
     });
 
     on<UserScreenEvent>((event, emit) {
-      emit(UserSet(state.userBlocModel!.copyWith(statePage: event.statePage)));
+      emit(UserSet(state.userBlocModel!
+          .copyWith(statePage: event.statePage, userSelect: null)));
     });
 
     on<NewUserEvent>((event, emit) async {
       UserRepository repository = UserRepository(userPresenter: event.newUSer);
       await repository.saveUser();
+      emit(UserSet(state.userBlocModel!.copyWith(statePage: screenList)));
+    });
+
+    on<UpdateUserEvent>((event, emit) async {
+      UserRepository repository =
+          UserRepository(userPresenter: event.updateUSer);
+      await repository.updateUSer();
+      emit(UserSet(state.userBlocModel!.copyWith(statePage: screenList)));
+    });
+
+    on<SelectUserEvent>((event, emit) async {
+      emit(UserSet(state.userBlocModel!
+          .copyWith(statePage: screenNew, userSelect: event.userPresenter)));
+    });
+
+    on<DeleteUSerEvent>((event, emit) async {
+      UserRepository repository =
+          UserRepository(userPresenter: event.deleteUSer);
+      await repository.deleteUser();
       emit(UserSet(state.userBlocModel!.copyWith(statePage: screenList)));
     });
   }

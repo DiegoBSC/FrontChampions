@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:sport_system_play_mono/blocs/bloc/userPageBloc/user_page_bloc.dart';
 import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/global/value_label.dart';
 import 'package:sport_system_play_mono/models/paginator_user_model.dart';
@@ -7,7 +8,9 @@ import 'package:sport_system_play_mono/responsive.dart';
 
 class ListTableUser extends StatefulWidget {
   final PaginatorUserModel? paginator;
-  const ListTableUser({Key? key, this.paginator}) : super(key: key);
+  final UserPageBloc userPageBloc;
+  const ListTableUser({Key? key, this.paginator, required this.userPageBloc})
+      : super(key: key);
 
   @override
   State<ListTableUser> createState() => _ListTableUserState();
@@ -31,8 +34,8 @@ class _ListTableUserState extends State<ListTableUser> {
           final item = widget.paginator!.data![index];
 
           return Responsive.isMobile(context)
-              ? cardDataUserMovil(context, item, index + 1)
-              : cardDataUser(context, item, index + 1);
+              ? cardDataUserMovil(context, item, index + 1, widget.userPageBloc)
+              : cardDataUser(context, item, index + 1, widget.userPageBloc);
         },
         itemCount: widget.paginator!.data!.length,
       ),
@@ -54,7 +57,8 @@ Container defaultContainer(context, Widget content) {
   );
 }
 
-Widget cardDataUser(BuildContext context, UserPresenter presenter, int index) {
+Widget cardDataUser(BuildContext context, UserPresenter presenter, int index,
+    UserPageBloc userPageBloc) {
   return defaultContainer(
     context,
     Row(
@@ -92,7 +96,7 @@ Widget cardDataUser(BuildContext context, UserPresenter presenter, int index) {
                   icon: const Icon(Icons.edit),
                   tooltip: 'Editar',
                   onPressed: () {
-                    print("Boton Editarsssssss");
+                    userPageBloc.add(SelectUserEvent(presenter));
                   },
                 ),
               ),
@@ -111,7 +115,7 @@ Widget cardDataUser(BuildContext context, UserPresenter presenter, int index) {
                   icon: const Icon(Icons.delete),
                   tooltip: 'Eliminar',
                   onPressed: () {
-                    print("Boton eliminar");
+                    userPageBloc.add(DeleteUSerEvent(presenter));
                   },
                 ),
               ),
@@ -123,8 +127,8 @@ Widget cardDataUser(BuildContext context, UserPresenter presenter, int index) {
   );
 }
 
-Widget cardDataUserMovil(
-    BuildContext context, UserPresenter presenter, int index) {
+Widget cardDataUserMovil(BuildContext context, UserPresenter presenter,
+    int index, UserPageBloc userPageBloc) {
   return defaultContainer(
     context,
     Row(
@@ -179,7 +183,7 @@ Widget cardDataUserMovil(
                 icon: const Icon(Icons.edit),
                 tooltip: 'Editar',
                 onPressed: () {
-                  print("Boton Editar");
+                  userPageBloc.add(SelectUserEvent(presenter));
                 },
               ),
             ),
@@ -198,7 +202,7 @@ Widget cardDataUserMovil(
                 icon: const Icon(Icons.delete),
                 tooltip: 'Eliminar',
                 onPressed: () {
-                  print("Boton eliminar");
+                  userPageBloc.add(DeleteUSerEvent(presenter));
                 },
               ),
             ),

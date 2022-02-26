@@ -23,3 +23,13 @@ class NewUserEvent extends UserPageEvent {
   final UserPresenter newUSer;
   NewUserEvent(this.newUSer);
 }
+
+class UpdateUserEvent extends UserPageEvent {
+  final UserPresenter updateUSer;
+  UpdateUserEvent(this.updateUSer);
+}
+
+class DeleteUSerEvent extends UserPageEvent {
+  final UserPresenter deleteUSer;
+  DeleteUSerEvent(this.deleteUSer);
+}

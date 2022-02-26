@@ -17,7 +17,7 @@ class UserBlocModel {
     int? page,
   }) =>
       UserBlocModel(
-          userSelect: userSelect ?? this.userSelect,
+          userSelect: userSelect,
           paginatorUserModel: paginatorUserModel ?? this.paginatorUserModel,
           statePage: statePage ?? this.statePage,
           page: page ?? this.page);

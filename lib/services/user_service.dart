@@ -55,4 +55,47 @@ class UserService {
       return null;
     }
   }
+
+  Future<UserPresenter?> updateUser(UserPresenter userSave) async {
+    final String token = await AuthService.getToken();
+
+    try {
+      loading = true;
+      final data = jsonEncode(userSave.toJson());
+      final resp = await http.put(
+          Uri.parse('${Enviroments.apiUrl}/private/user/update'),
+          body: data,
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token '
+          });
+      if (resp.statusCode == 200 && resp.body.isNotEmpty) {
+        loading = false;
+        return userPresenterFromJson(resp.body);
+      }
+    } catch (_) {
+      loading = false;
+      return null;
+    }
+  }
+
+  Future<void> deleteUser(String? idUser) async {
+    final String token = await AuthService.getToken();
+
+    try {
+      loading = true;
+      final resp = await http.delete(
+          Uri.parse(
+              '${Enviroments.apiUrl}/private/user/deleteById?idUser=$idUser'),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer $token '
+          });
+      if (resp.statusCode == 200 && resp.body.isNotEmpty) {
+        loading = false;
+      }
+    } catch (_) {
+      loading = false;
+    }
+  }
 }

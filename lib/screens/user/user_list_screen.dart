@@ -79,6 +79,7 @@ class _UserListScreenState extends State<UserListScreen> {
                       titleContent: 'Usuarios Registrados',
                       dataContent: ListTableUser(
                         paginator: state.userBlocModel!.paginatorUserModel,
+                        userPageBloc: widget.userPageBloc,
                       ),
                     );
                   } else {

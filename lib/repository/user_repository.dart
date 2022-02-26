@@ -15,4 +15,10 @@ class UserRepository {
 
   Future<UserPresenter?> saveUser() async =>
       await userService.saveUser(userPresenter!);
+
+  Future<UserPresenter?> updateUSer() async =>
+      await userService.updateUser(userPresenter!);
+
+  Future<void> deleteUser() async =>
+      await userService.deleteUser(userPresenter!.id);
 }

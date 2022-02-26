@@ -4,9 +4,9 @@ import 'package:sport_system_play_mono/blocs/bloc/userPageBloc/user_page_bloc.da
 import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/helpers/view_alert.dart';
 import 'package:sport_system_play_mono/models/rol_presenter.dart';
+import 'package:sport_system_play_mono/models/rol_view.dart';
 import 'package:sport_system_play_mono/models/user_presenter.dart';
 import 'package:sport_system_play_mono/responsive.dart';
-import 'package:sport_system_play_mono/services/user_service.dart';
 import 'package:sport_system_play_mono/widgets/content_page.dart';
 import 'package:sport_system_play_mono/widgets/input_text_form.dart';
 import 'package:sport_system_play_mono/widgets/loading.dart';
@@ -29,6 +29,29 @@ class _UserNewScreenState extends State<UserNewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    List<RolView> listRolesData = listRoles;
+    bool isEdit = false;
+    dynamic idUser;
+    if (widget.userPageBloc.state.userBlocModel?.userSelect != null) {
+      isEdit = true;
+      idUser = widget.userPageBloc.state.userBlocModel!.userSelect!.id;
+      controllerEmail.text =
+          widget.userPageBloc.state.userBlocModel!.userSelect!.email;
+      controllerUser.text =
+          widget.userPageBloc.state.userBlocModel!.userSelect!.username;
+
+      rolesSelect =
+          widget.userPageBloc.state.userBlocModel!.userSelect!.rolesPresenter;
+
+      for (var element in listRolesData) {
+        for (var elementSelect in rolesSelect) {
+          if (element.name == elementSelect.name) {
+            element.isSelect = true;
+          }
+        }
+      }
+    }
+
     return loading
         ? Padding(
             padding: const EdgeInsets.only(top: 100),
@@ -64,31 +87,37 @@ class _UserNewScreenState extends State<UserNewScreen> {
                                     .add(RolPresenter(name: element.name));
                               }
                             }
-
-                            if (rolesSelect.isEmpty) {
-                              viewAlert(context, "Error :(",
-                                  "Debe Seleccionar al menos un Rol");
-                              return;
-                            }
-
-                            UserPresenter userSave = UserPresenter(
-                                username: controllerUser.text,
-                                email: controllerEmail.text,
-                                password: controllerPassword.text,
-                                rolesPresenter: rolesSelect,
-                                status: 'ACT',
-                                createdDate: DateTime.now());
-
-                            String messageValidate = validateUser(userSave);
-
-                            if (messageValidate.isNotEmpty) {
-                              viewAlert(context, "Error :(", messageValidate);
-                              return;
-                            }
-
-                            widget.userPageBloc.add(NewUserEvent(userSave));
-
                             setState(() {
+                              if (rolesSelect.isEmpty) {
+                                viewAlert(context, "Error :(",
+                                    "Debe Seleccionar al menos un Rol");
+                                loading = true;
+                                return;
+                              }
+
+                              UserPresenter userSave = UserPresenter(
+                                  id: idUser,
+                                  username: controllerUser.text,
+                                  email: controllerEmail.text,
+                                  password: controllerPassword.text,
+                                  rolesPresenter: rolesSelect,
+                                  status: 'ACT',
+                                  createdDate: DateTime.now());
+
+                              String messageValidate =
+                                  validateUser(userSave, isEdit);
+
+                              if (messageValidate.isNotEmpty) {
+                                viewAlert(context, "Error :(", messageValidate);
+                                loading = true;
+                                return;
+                              }
+                              isEdit
+                                  ? widget.userPageBloc
+                                      .add(UpdateUserEvent(userSave))
+                                  : widget.userPageBloc
+                                      .add(NewUserEvent(userSave));
+
                               loading = true;
                             });
                           },
@@ -108,6 +137,9 @@ class _UserNewScreenState extends State<UserNewScreen> {
                             ),
                           ),
                           onPressed: () {
+                            controllerEmail.clear();
+                            controllerPassword.clear();
+                            controllerUser.clear();
                             widget.userPageBloc
                                 .add(UserScreenEvent(screenList));
                           },
@@ -166,16 +198,19 @@ class _UserNewScreenState extends State<UserNewScreen> {
                                     height: 80,
                                     width: 500,
                                     child: ListView.builder(
-                                        itemCount: listRoles.length,
+                                        itemCount: listRolesData.length,
                                         itemBuilder: (_, index) {
                                           return CheckboxListTile(
                                             activeColor: primaryColor,
-                                            title: Text(listRoles[index].name),
-                                            value: listRoles[index].isSelect,
+                                            title:
+                                                Text(listRolesData[index].name),
+                                            value:
+                                                listRolesData[index].isSelect,
                                             onChanged: (bool? value) {
                                               setState(() {
-                                                listRoles[index].isSelect =
-                                                    !listRoles[index].isSelect;
+                                                listRolesData[index].isSelect =
+                                                    !listRolesData[index]
+                                                        .isSelect;
                                               });
                                             },
                                             secondary: const Icon(
@@ -200,14 +235,14 @@ class _UserNewScreenState extends State<UserNewScreen> {
   }
 }
 
-String validateUser(UserPresenter user) {
+String validateUser(UserPresenter user, bool isEdit) {
   if (user.email.isEmpty) {
     return 'El campo email no puede estar vacio';
   }
   if (user.username.isEmpty) {
     return 'El campo nombre de usuario no puede estar vacio';
   }
-  if (user.password!.isEmpty) {
+  if (user.password!.isEmpty && !isEdit) {
     return 'El campo clave no puede estar vacia';
   }
   return '';

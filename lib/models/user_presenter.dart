@@ -42,6 +42,7 @@ class UserPresenter {
 
   Map<String, dynamic> toJson() {
     final _data = <String, dynamic>{};
+    _data['id'] = id;
     _data['username'] = username;
     _data['email'] = email;
     _data['password'] = password;

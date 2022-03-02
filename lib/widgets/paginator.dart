@@ -50,7 +50,7 @@ class _PaginatorState extends State<Paginator> {
           width: 10,
         ),
         Text(
-            widget.totalPage.toString() + ' / ' + (widget.page + 1).toString()),
+            (widget.page + 1).toString() + ' / ' + widget.totalPage.toString()),
         SizedBox(
           width: 10,
         ),

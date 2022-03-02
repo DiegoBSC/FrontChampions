@@ -19,7 +19,8 @@ class UserListScreen extends StatefulWidget {
 class _UserListScreenState extends State<UserListScreen> {
   @override
   void initState() {
-    widget.userPageBloc.add(UserListEvent(0, 6));
+    widget.userPageBloc
+        .add(UserListEvent(pageInitialPaginator, sizeInitialPaginator));
     super.initState();
   }
 
@@ -61,7 +62,8 @@ class _UserListScreenState extends State<UserListScreen> {
                           page: widget.userPageBloc.state.userBlocModel!.page!,
                           size: 6,
                           onChangePage: (value) {
-                            widget.userPageBloc.add(UserListEvent(value, 6));
+                            widget.userPageBloc.add(
+                                UserListEvent(value, sizeInitialPaginator));
                           },
                         )
                       : Text("cargando")

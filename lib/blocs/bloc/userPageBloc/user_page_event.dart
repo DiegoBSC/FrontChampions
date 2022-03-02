@@ -31,5 +31,7 @@ class UpdateUserEvent extends UserPageEvent {
 
 class DeleteUSerEvent extends UserPageEvent {
   final UserPresenter deleteUSer;
-  DeleteUSerEvent(this.deleteUSer);
+  final int page;
+  final int size;
+  DeleteUSerEvent(this.deleteUSer, this.page, this.size);
 }

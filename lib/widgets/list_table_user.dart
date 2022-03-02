@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:sport_system_play_mono/blocs/bloc/userPageBloc/user_page_bloc.dart';
 import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/global/value_label.dart';
+import 'package:sport_system_play_mono/helpers/view_alert.dart';
 import 'package:sport_system_play_mono/models/paginator_user_model.dart';
 import 'package:sport_system_play_mono/models/user_presenter.dart';
 import 'package:sport_system_play_mono/responsive.dart';
+import 'package:sport_system_play_mono/widgets/loading.dart';
 
 class ListTableUser extends StatefulWidget {
   final PaginatorUserModel? paginator;
@@ -17,6 +19,7 @@ class ListTableUser extends StatefulWidget {
 }
 
 class _ListTableUserState extends State<ListTableUser> {
+  bool loading = false;
   @override
   void initState() {
     super.initState();
@@ -27,18 +30,23 @@ class _ListTableUserState extends State<ListTableUser> {
     final ScrollController controller = ScrollController();
 
     return Expanded(
-      child: ListView.builder(
-        controller: controller,
-        shrinkWrap: true,
-        itemBuilder: (BuildContext context, int index) {
-          final item = widget.paginator!.data![index];
-
-          return Responsive.isMobile(context)
-              ? cardDataUserMovil(context, item, index + 1, widget.userPageBloc)
-              : cardDataUser(context, item, index + 1, widget.userPageBloc);
-        },
-        itemCount: widget.paginator!.data!.length,
-      ),
+      child: widget.userPageBloc.state.loading
+          ? Center(
+              child: Loading(),
+            )
+          : ListView.builder(
+              controller: controller,
+              shrinkWrap: true,
+              itemBuilder: (BuildContext context, int index) {
+                final item = widget.paginator!.data![index];
+                return Responsive.isMobile(context)
+                    ? cardDataUserMovil(
+                        context, item, index + 1, widget.userPageBloc)
+                    : cardDataUser(
+                        context, item, index + 1, widget.userPageBloc);
+              },
+              itemCount: widget.paginator!.data!.length,
+            ),
     );
   }
 }
@@ -115,7 +123,14 @@ Widget cardDataUser(BuildContext context, UserPresenter presenter, int index,
                   icon: const Icon(Icons.delete),
                   tooltip: 'Eliminar',
                   onPressed: () {
-                    userPageBloc.add(DeleteUSerEvent(presenter));
+                    viewAlertConfirm(context, "Confirmación :",
+                            "Esta seguro de eliminar el usuario?")
+                        .then((value) {
+                      if (value) {
+                        userPageBloc.add(DeleteUSerEvent(presenter,
+                            pageInitialPaginator, sizeInitialPaginator));
+                      }
+                    });
                   },
                 ),
               ),
@@ -202,7 +217,14 @@ Widget cardDataUserMovil(BuildContext context, UserPresenter presenter,
                 icon: const Icon(Icons.delete),
                 tooltip: 'Eliminar',
                 onPressed: () {
-                  userPageBloc.add(DeleteUSerEvent(presenter));
+                  viewAlertConfirm(context, "Confirmación :",
+                          "Esta seguro de eliminar el usuario?")
+                      .then((value) {
+                    if (value) {
+                      userPageBloc.add(DeleteUSerEvent(presenter,
+                          pageInitialPaginator, sizeInitialPaginator));
+                    }
+                  });
                 },
               ),
             ),

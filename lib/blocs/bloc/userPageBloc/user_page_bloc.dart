@@ -5,6 +5,7 @@ import 'package:sport_system_play_mono/constants.dart';
 import 'package:sport_system_play_mono/models/paginator_user_model.dart';
 import 'package:sport_system_play_mono/models/user_presenter.dart';
 import 'package:sport_system_play_mono/repository/user_repository.dart';
+import 'package:sport_system_play_mono/widgets/loading.dart';
 
 part 'user_page_event.dart';
 part 'user_spage_state.dart';
@@ -43,10 +44,14 @@ class UserPageBloc extends Bloc<UserPageEvent, UserPageState> {
     });
 
     on<DeleteUSerEvent>((event, emit) async {
-      UserRepository repository =
-          UserRepository(userPresenter: event.deleteUSer);
+      emit(LoadingSet(true, state.userBlocModel!));
+      UserRepository repository = UserRepository(
+          userPresenter: event.deleteUSer, page: event.page, size: event.size);
       await repository.deleteUser();
-      emit(UserSet(state.userBlocModel!.copyWith(statePage: screenList)));
+      PaginatorUserModel? paginator = await repository.getUsersByAdmin();
+      emit(UserSet(state.userBlocModel!
+          .copyWith(statePage: screenList, paginatorUserModel: paginator)));
+      emit(LoadingSet(false, state.userBlocModel!));
     });
   }
 }

@@ -17,3 +17,6 @@ List<RolView> listRoles = [
   RolView(label: 'Administrador', name: 'ROLE_ADMIN', isSelect: false),
   RolView(label: 'Usuario', name: 'ROLE_USER', isSelect: false),
 ];
+
+const pageInitialPaginator = 0;
+const sizeInitialPaginator = 6;
